@@ -1,11 +1,11 @@
 exports.up = function(knex) {
     return knex.schema.createTable("days", (table) => {
         table.date("date").primary();
-        table.uuid("schedule_id").notNullable();
+        table.integer("user_id").notNullable();
         table
-            .foreign("schedule_id")
-            .references("id")
-            .inTable("schedules")
+            .foreign("user_id")
+            .references("user_id")
+            .inTable("users")
             .onDelete("CASCADE");
     });
 };
