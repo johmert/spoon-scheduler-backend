@@ -2,10 +2,10 @@ const service = require("./users.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 function read(req, res, next) {
-    res.json({ data: res.locals.movie });
+    res.json({ data: res.locals.user });
 }
 
-function register(req, res) {
+async function register(req, res) {
     const newUser = await service.register(req.body.data);
     res.status(201).json({ data: newUser });
 }
