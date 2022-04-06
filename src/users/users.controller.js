@@ -12,6 +12,12 @@ async function createIdNumber(req, res, next) {
     return next();
 }
 
+function destroy(req, res, next) {
+    service.delete(res.locals.user.user_id)
+        .then(() => res.sendStatus(204))
+        .catch(next);
+}
+
 function hasUserNameAndPassword(req, res, next) {
     const { password, username } = req.body.data;
     if(password && username) return next();
@@ -57,6 +63,7 @@ async function userExists(req, res, next) {
 }
 
 module.exports = {
+    delete: [asyncErrorBoundary(userExists), destroy],
     read: [asyncErrorBoundary(userExists), asyncErrorBoundary(read)],
     register: [hasUserNameAndPassword, asyncErrorBoundary(createIdNumber), asyncErrorBoundary(register)],
     update: [asyncErrorBoundary(userExists), hasUserNameAndPassword, asyncErrorBoundary(update)],
