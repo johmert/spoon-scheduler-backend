@@ -67,4 +67,5 @@ module.exports = {
     read: [asyncErrorBoundary(userExists), asyncErrorBoundary(read)],
     register: [hasUserNameAndPassword, asyncErrorBoundary(createIdNumber), asyncErrorBoundary(register)],
     update: [asyncErrorBoundary(userExists), hasUserNameAndPassword, asyncErrorBoundary(update)],
+    userExists: asyncErrorBoundary(userExists),
 }
