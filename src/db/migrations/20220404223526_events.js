@@ -1,7 +1,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable("events", (table) => {
         table.increments("event_id").primary();
-        table.integer("spoons");
+        table.integer("spoons").notNullable();
         table.integer("timeDuration");
         table.integer("importance");
         table.date("date").notNullable();
