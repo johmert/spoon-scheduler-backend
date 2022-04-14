@@ -7,7 +7,7 @@ async function createIdNumber(req, res, next) {
         user_id: parseInt(nextId),
         username: req.body.data.username,
         password: req.body.data.password,
-        settings: req.body.data.settings,
+        settings: req.body.data.settings ? req.body.data.settings : "default",
     }
     return next();
 }
@@ -50,7 +50,7 @@ async function update(req, res, next) {
 
 async function userExists(req, res, next) {
     const { userId } = req.params;
-    const user = await service.read(userId);
+    const user = await service.read(userId); 
     if(user){
         res.locals.user = user;
         return next();

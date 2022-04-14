@@ -20,6 +20,13 @@ function read(userId){
         .first();
 }
 
+function readByUsername(username, password) {
+    return knex(table)
+        .select("user_id")
+        .where({ username: username, password: password })
+        .first()
+}
+
 function register(user) {
     return knex(table)
         .insert(user)
@@ -36,6 +43,7 @@ module.exports = {
     delete: destroy,
     getNextId,
     read,
+    readByUsername,
     register,
     update,
 }
