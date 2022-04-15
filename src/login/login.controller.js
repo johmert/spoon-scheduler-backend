@@ -4,9 +4,7 @@ const { readByUsername } = require("../users/users.service");
 async function login(req, res, next){
     const { username, password } = req.body;
     const id = await readByUsername(username, password);
-    console.log(id)
     if(id) {
-        console.log(id)
         res.send({
             token: id,
         });

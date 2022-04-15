@@ -5,9 +5,9 @@ async function createIdNumber(req, res, next) {
     const nextId = await service.getNextId();
     res.locals.user = {
         user_id: parseInt(nextId),
-        username: req.body.data.username,
-        password: req.body.data.password,
-        settings: req.body.data.settings ? req.body.data.settings : "default",
+        username: req.body.username,
+        password: req.body.password,
+        settings: req.body.settings ? req.body.settings : "default",
     }
     return next();
 }
@@ -19,7 +19,7 @@ function destroy(req, res, next) {
 }
 
 function hasUserNameAndPassword(req, res, next) {
-    const { password, username } = req.body.data;
+    const { password, username } = req.body;
     if(password && username) return next();
     next({
         status: 400,
