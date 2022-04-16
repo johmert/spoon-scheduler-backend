@@ -4,6 +4,7 @@ exports.up = function(knex) {
         table.string("username").notNullable();
         table.string("password").notNullable();
         table.string("settings");
+        table.integer("avg_spoons");
         table.timestamps(true, true);
     });
 };

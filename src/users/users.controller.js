@@ -8,6 +8,7 @@ async function createIdNumber(req, res, next) {
         username: req.body.username,
         password: req.body.password,
         settings: req.body.settings ? req.body.settings : "default",
+        avg_spoons: req.body.avg_spoons ? req.body.avg_spoons : 0,
     }
     return next();
 }
@@ -39,9 +40,10 @@ async function register(req, res) {
 async function update(req, res, next) {
     const user = {
         user_id: res.locals.user.user_id,
-        username: req.body.data.username ? req.body.data.username : res.locals.user.username,
-        password: req.body.data.password ? req.body.data.password : res.locals.user.password,
-        settings: req.body.data.settings ? req.body.data.settings : res.locals.user.settings,
+        username: req.body.username ? req.body.username : res.locals.user.username,
+        password: req.body.password ? req.body.password : res.locals.user.password,
+        settings: req.body.settings ? req.body.settings : res.locals.user.settings,
+        avg_spoons: req.body.avg_spoons ? req.body.avg_spoons : res.locals.user.avg_spoons,
     }
     service.update(user)
         .then(data => res.json({ data }))
