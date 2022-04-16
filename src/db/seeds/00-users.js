@@ -2,7 +2,8 @@ const initialUser = {
   user_id: 1,
   username: "testUser",
   password: "admin",
-  settings: "default"
+  settings: "default",
+  avg_spoons: 0
 }
 
 exports.seed = function (knex) {
