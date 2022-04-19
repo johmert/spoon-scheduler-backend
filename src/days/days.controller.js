@@ -29,7 +29,6 @@ function destroy(req, res, next) {
 function hasDateAndSpoons(req, res, next) {
     const { date, max_spoons } = req.body;
     const { userId } = req.params;
-    console.log(userId)
     if(date){
         res.locals.day = {
             date,
