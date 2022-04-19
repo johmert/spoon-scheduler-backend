@@ -1,5 +1,7 @@
 const initialDay = {
   date: "2022-04-06",
+  day_left: 1440,
+  max_spoons: 20,
   user_id: 1,
 }
 

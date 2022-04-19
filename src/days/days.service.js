@@ -20,11 +20,17 @@ function newDay(date) {
         .returning("*");
 }
 
-function read(date){
+function read(date) {
     return knex(table)
         .select("*")
         .where({ date: date })
         .first();
+}
+
+function update(day) {
+    return knex(table)
+        .where({ date: day.date })
+        .update(day, "*");
 }
 
 module.exports = {
@@ -32,4 +38,5 @@ module.exports = {
     list,
     newDay,
     read,
+    update,
 }
