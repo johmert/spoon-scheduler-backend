@@ -2,6 +2,13 @@ const knex = require("../db/connection");
 
 const table = "users";
 
+async function attachDates(user) {
+    user.days = await knex("days")
+        .select("*")
+        .where({ "days.user_id": user.user_id });
+    return user;
+}
+
 function destroy(userId) {
     return knex(table)
         .where({ user_id: userId })
@@ -17,7 +24,8 @@ function read(userId){
     return knex(table)
         .select("*")
         .where({ user_id: userId })
-        .first();
+        .first()
+        .then(user => attachDates(user));
 }
 
 function readByUsername(username, password) {

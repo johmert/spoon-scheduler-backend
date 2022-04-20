@@ -54,7 +54,7 @@ async function list(req, res, next) {
 }
 
 function read(req, res, next) {
-    res.json({ data: res.locals.day });
+    res.json(res.locals.day);
 }
 
 async function update(req, res, next) {

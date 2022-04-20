@@ -10,11 +10,11 @@ async function createIdNumber(req, res, next) {
     const nextId = await service.getNextId();
     res.locals.event = {
         event_id: parseInt(nextId),
-        name: req.body.data.name,
-        description: req.body.data.description,
-        spoons: req.body.data.spoons,
-        timeDuration: req.body.data.timeDuration,
-        importance: req.body.data.importance,
+        name: req.body.name,
+        description: req.body.description,
+        spoons: req.body.spoons,
+        timeDuration: req.body.timeDuration,
+        importance: req.body.importance,
         date: req.params.date,
     }
     return next();
@@ -47,7 +47,7 @@ function hasAllProperties(req, res, next) {
         name,
         spoons,
         timeDuration,
-     } = req.body.data;
+     } = req.body;
     if( 
         description &&
         importance && 
@@ -67,18 +67,18 @@ async function list(req, res, next){
 }
 
 function read(req, res, next) {
-    res.json({ data: res.locals.event });
+    res.json(res.locals.event);
 }
 
 async function update(req, res, next) {
     const event = {
         event_id: req.params.eventId,
-        date: req.body.data.date ? req.body.data.date : res.locals.event.date,
-        description: req.body.data.description ? req.body.data.description : res.locals.event.description,
-        importance: req.body.data.importance ? req.body.data.importance : res.locals.event.importance,
-        name: req.body.data.name ? req.body.data.name : res.locals.event.name,
-        spoons: req.body.data.spoons ? req.body.data.spoons : res.locals.event.spoons,
-        timeDuration: req.body.data.timeDuration ? req.body.data.timeDuration : res.locals.event.timeDuration,
+        date: req.body.date ? req.body.date : res.locals.event.date,
+        description: req.body.description ? req.body.description : res.locals.event.description,
+        importance: req.body.importance ? req.body.importance : res.locals.event.importance,
+        name: req.body.name ? req.body.name : res.locals.event.name,
+        spoons: req.body.spoons ? req.body.spoons : res.locals.event.spoons,
+        timeDuration: req.body.timeDuration ? req.body.timeDuration : res.locals.event.timeDuration,
     }
     service.update(event)
         .then(data => res.json({ data }))

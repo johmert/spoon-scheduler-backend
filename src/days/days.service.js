@@ -2,6 +2,13 @@ const knex = require("../db/connection");
 
 const table = "days";
 
+async function attachEvents(day) {
+    day.events = await knex("events")
+        .select("*")
+        .where({ "events.date": day.date });
+    return day;
+}
+
 function destroy(date) {
     return knex(table)
         .where({ date: date })
@@ -24,7 +31,8 @@ function read(date) {
     return knex(table)
         .select("*")
         .where({ date: date })
-        .first();
+        .first()
+        .then(day => attachEvents(day));
 }
 
 function update(day) {

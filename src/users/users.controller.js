@@ -29,7 +29,7 @@ function hasUserNameAndPassword(req, res, next) {
 }
 
 function read(req, res, next) {
-    res.json({ data: res.locals.user });
+    res.json(res.locals.user);
 }
 
 async function register(req, res) {
