@@ -2,7 +2,7 @@ const initialUser = {
   user_id: 1,
   username: "testUser",
   password: "admin",
-  settings: "default",
+  settings: "3-day",
   avg_spoons: 0
 }
 

@@ -7,7 +7,7 @@ async function createIdNumber(req, res, next) {
         user_id: parseInt(nextId),
         username: req.body.username,
         password: req.body.password,
-        settings: req.body.settings ? req.body.settings : "default",
+        settings: req.body.settings ? req.body.settings : "3-day",
         avg_spoons: req.body.avg_spoons ? req.body.avg_spoons : 0,
     }
     return next();
