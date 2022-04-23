@@ -14,12 +14,6 @@ function destroy(eventId) {
         .del();
 }
 
-async function getNextId() {
-    const ids = await knex(table).select("event_id");
-    console.log(ids);
-    return ids.length +1;
-}
-
 function list() {
     return knex(table).select("*");
 }
@@ -40,7 +34,6 @@ function update(event) {
 module.exports = {
     create,
     delete: destroy,
-    getNextId,
     list,
     read,
     update,

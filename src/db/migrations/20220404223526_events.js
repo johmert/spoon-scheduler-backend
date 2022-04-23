@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable("events", (table) => {
-        table.increments("event_id").unique().primary();
+        table.uuid("event_id").unique().primary();
         table.string("name").notNullable();
         table.text("description");
         table.integer("spoons").notNullable();
