@@ -18,7 +18,14 @@ function destroy(date) {
 function list(userId) {
     return knex(table)
         .select("*")
-        .where({ user_id: userId });
+        .where({ user_id: userId })
+        .then(days => {
+            return Promise.all(
+                days.map(day => {
+                    return attachEvents(day);
+                })
+            )
+        });
 }
 
 function newDay(date) {
