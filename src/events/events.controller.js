@@ -14,7 +14,6 @@ function createIdNumber(req, res, next) {
         ],
     };
     let id = uuidv4(v4options.random);
-    console.log(id);
     res.locals.event = {
         event_id: id,
         name: req.body.name,
