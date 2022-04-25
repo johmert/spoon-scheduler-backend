@@ -15,11 +15,6 @@ function destroy(userId) {
         .del();
 }
 
-async function getNextId() {
-    const ids = await knex(table).select("user_id");
-    return ids.length +1;
-}
-
 function read(userId){
     return knex(table)
         .select("*")
@@ -49,7 +44,6 @@ function update(user) {
 
 module.exports = {
     delete: destroy,
-    getNextId,
     read,
     readByUsername,
     register,

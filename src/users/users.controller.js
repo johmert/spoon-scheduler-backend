@@ -1,14 +1,18 @@
+const { v4: uuidv4 } = require("uuid");
 const service = require("./users.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
-async function createIdNumber(req, res, next) {
-    const nextId = await service.getNextId();
+function createIdNumber(req, res, next) {
+    const v4options = {
+        random: [
+            0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea, 0x71, 0xb4, 0xef, 0xe1, 0x67, 0x1c, 0x58, 0x36,
+          ],
+    }
+    const id = uuidv4(v4options.random);
     res.locals.user = {
-        user_id: parseInt(nextId),
+        user_id: id,
         username: req.body.username,
         password: req.body.password,
-        settings: req.body.settings ? req.body.settings : "3-day",
-        avg_spoons: req.body.avg_spoons ? req.body.avg_spoons : 0,
     }
     return next();
 }
@@ -42,8 +46,6 @@ async function update(req, res, next) {
         user_id: res.locals.user.user_id,
         username: req.body.username ? req.body.username : res.locals.user.username,
         password: req.body.password ? req.body.password : res.locals.user.password,
-        settings: req.body.settings ? req.body.settings : res.locals.user.settings,
-        avg_spoons: req.body.avg_spoons ? req.body.avg_spoons : res.locals.user.avg_spoons,
     }
     service.update(user)
         .then(data => res.json({ data }))
@@ -67,7 +69,7 @@ async function userExists(req, res, next) {
 module.exports = {
     delete: [asyncErrorBoundary(userExists), destroy],
     read: [asyncErrorBoundary(userExists), asyncErrorBoundary(read)],
-    register: [hasUserNameAndPassword, asyncErrorBoundary(createIdNumber), asyncErrorBoundary(register)],
+    register: [hasUserNameAndPassword, createIdNumber, asyncErrorBoundary(register)],
     update: [asyncErrorBoundary(userExists), asyncErrorBoundary(update)],
     userExists: asyncErrorBoundary(userExists),
 }

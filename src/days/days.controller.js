@@ -32,7 +32,6 @@ function hasDateAndSpoons(req, res, next) {
     if(date){
         res.locals.day = {
             date,
-            day_left: 1440,
             max_spoons,
             user_id: userId
         }
@@ -60,7 +59,6 @@ function read(req, res, next) {
 async function update(req, res, next) {
     const day = {
         date: res.locals.day.date,
-        day_left: req.body.day_left ? req.body.day_left : res.locals.day.day_left,
         max_spoons: req.body.max_spoons ? req.body.max_spoons : res.locals.day.max_spoons,
         user_id: res.locals.day.user_id
     }
