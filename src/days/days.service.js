@@ -4,7 +4,7 @@ const table = "days";
 
 async function attachEvents(day) {
     day.events = await knex("events")
-        .select("event_id", "name", "importance", "spoons", "timeDuration")
+        .select("event_id", "name", "important", "spoons", "timeDuration")
         .where({ "events.date": day.date });
     return day;
 }

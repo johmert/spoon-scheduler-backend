@@ -5,7 +5,7 @@ exports.up = function(knex) {
         table.text("description");
         table.integer("spoons").notNullable();
         table.integer("timeDuration");
-        table.integer("importance");
+        table.boolean("important");
         table.date("date").notNullable();
         table
             .foreign("date")
