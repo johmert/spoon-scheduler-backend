@@ -1,6 +1,6 @@
 # Spoon Scheduler
 
-## Website URL: 
+## Website URL: https://spoon-scheduler.vercel.app
 
 ## Table of Contents
 
